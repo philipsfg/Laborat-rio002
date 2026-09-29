@@ -26,6 +26,7 @@ public class RegistroTempoOnline {
         return false;
     }
 
+    @Override
     public String toString(){
         return "Nome da disciplina: " + this.nomeDisciplina + " Tempo online: " + this.tempo + " Tempo online esperado: " + this.tempoOnlineEsperado;
     }
