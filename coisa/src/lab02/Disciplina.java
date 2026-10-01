@@ -43,11 +43,8 @@ public class Disciplina {
 
     @Override
     public String toString(){
-        return "Nome da disciplina: " + this.nomeDisciplina + " Tempo de estudo: " + this.horas + " Média: " + (nota1 + nota2 + nota3 + nota4)/4
-                + "Nota1: " + nota1
-                + "Nota2: " + nota2
-                + "Nota3: " + nota3
-                + "Nota4: " + nota4;
+        return this.nomeDisciplina + " " + this.horas + " " + ((nota4 + nota3 + nota2 + nota1)/4) + " " + "["+
+                this.nota1 + ", " + this.nota2 + ", " + this.nota3 + ", " + this.nota4 + "]";
     }
 
 
