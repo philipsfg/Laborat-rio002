@@ -39,37 +39,34 @@ public class Disciplina {
     }
 
     public boolean aprovado(){
-        int soma = 0;
-
-        for(double nota : notas){
-            soma += nota;
-        }
-        if( soma/ 4 >= 7 ){
-            return true;
-        }
-        return false;
+        return calculaMedia() >= 7.0;
     }
 
-    @Override
-    public String toString(){
-        int somanotas = 0;
-        int somapesos = 0;
-        if (tempeso){
-            for (int i = 0; i < numeroDeNotas ; i++){
+    public double calculaMedia() {
+        double somanotas = 0;
+        double somapesos = 0;
+
+        if (tempeso) {
+            for (int i = 0; i < numeroDeNotas; i++) {
                 somanotas += notas[i] * pesos[i];
                 somapesos += pesos[i];
             }
             this.media = somanotas/somapesos;
-        }
-        else{
-            for (int i = 0; i < numeroDeNotas ; i++) {
+            return somanotas/somapesos;
+            }
+        else {
+            for (int i = 0; i < numeroDeNotas; i++) {
                 somanotas += notas[i];
             }
-
             this.media = somanotas/numeroDeNotas;
+            return somanotas/numeroDeNotas;
         }
+    }
 
 
+
+    @Override
+    public String toString(){
         return this.nomeDisciplina + " " + this.horas + " " + this.media + " " + Arrays.toString(notas);
     }
 

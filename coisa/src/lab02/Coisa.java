@@ -1,6 +1,9 @@
 package lab02;
 
+import java.util.Arrays;
+
 public class Coisa {
+    private int[] pesos = {1,2,3,4};
     public static void main(String[] args) {
         registrarDescanso();
         System.out.println("-----");
@@ -37,7 +40,7 @@ public class Coisa {
         System.out.println(tempoP2.toString());
     }
     private static void controlarDisciplina() {
-        Disciplina prog2 = new Disciplina("PROGRAMACAO 2", 4);
+        Disciplina prog2 = new Disciplina("PROGRAMACAO 2", 4, new int[]{1,2,3,4});
         prog2.cadastraHoras(4);
         prog2.cadastraNota(1, 5.0);
         prog2.cadastraNota(2, 6.0);
@@ -61,8 +64,8 @@ public class Coisa {
             System.out.println(resumos[i]);
         }
 
-
         System.out.println();
+        System.out.println(Arrays.toString(meusResumos.busca("Base")));
         System.out.println("Resumos: ");
         System.out.println(meusResumos.imprimeResumos());
         System.out.println(meusResumos.temResumo("Classes"));

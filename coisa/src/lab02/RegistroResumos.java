@@ -1,5 +1,7 @@
 package lab02;
 
+import java.util.Arrays;
+
 public class RegistroResumos {
     //nessa parte eu criaria a clase resumo e usaria apenas um array
     private Resumo[] resumos;
@@ -90,8 +92,9 @@ public class RegistroResumos {
                 for (String palavra : palavras) {
                     if (palavra.equalsIgnoreCase(chaveDeBusca)) {
                         tem = true;
-                        buscas[quantidade] = resumos[i].getTema() + resumos[i].getConteudo();
+                        buscas[quantidade] = "Tema: " + resumos[i].getTema() + " | " +  "Conteudo: " + resumos[i].getConteudo();
                         quantidade++;
+                        break;
                     }
                 }
             }
