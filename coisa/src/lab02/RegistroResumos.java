@@ -1,38 +1,38 @@
 package lab02;
 
 public class RegistroResumos {
-    private String[] temas;
-    private String[] conteudos;
+    //nessa parte eu criaria a clase resumo e usaria apenas um array
+    private Resumo[] resumos;
     private int temasi = 0;
 
-    public RegistroResumos(int numeroDeResumos){
-        conteudos = new String[numeroDeResumos];
-        temas = new String[numeroDeResumos];
+    public RegistroResumos(int numeroDeResumos) {
+        resumos = new Resumo[numeroDeResumos];
     }
 
-    public void adiciona(String tema, String conteudo){
+    public void adiciona(String tema, String conteudo) {
         boolean jaExisteTema = false;
-        for(int i = 0; i < temas.length; i++){
-            if(tema.equals(temas[i])){
-                jaExisteTema = true;
+        for (int i = 0; i < conta(); i++) {
+            if (resumos[i] != null) {
+                if (tema.equals(resumos[i].getTema())) {
+                    jaExisteTema = true;
+                }
             }
         }
 
-        if(!jaExisteTema){
-            if(temasi == temas.length){
+        if (!jaExisteTema) {
+            if (temasi == resumos.length) {
                 temasi = 0;
             }
-            temas[temasi] = tema;
-            conteudos[temasi] = conteudo;
-            temasi ++;
+            resumos[temasi] = new Resumo(tema, conteudo);
+            temasi++;
         }
     }
 
-    public int conta(){
+    public int conta() {
         int soma = 0;
 
-        for(int i = 0; i < temas.length; i++){
-            if(temas[i] != null){
+        for (int i = 0; i < resumos.length; i++) {
+            if (resumos[i] != null) {
                 soma += 1;
             }
         }
@@ -40,24 +40,24 @@ public class RegistroResumos {
         return soma;
     }
 
-    public String[] pegaResumos(){
-        String[] resumos = new String[conta()];
+    public String[] pegaResumos() {
+        String[] resumosExiste = new String[conta()];
 
-        for(int i = 0; i < resumos.length; i++){
-            resumos[i] = temas[i] + ": " + conteudos[i];
+        for (int i = 0; i < resumosExiste.length; i++) {
+            resumosExiste[i] = resumos[i].getTema() + ": " + resumos[i].getConteudo();
         }
 
-        return resumos;
+        return resumosExiste;
     }
 
-    public String imprimeResumos(){
+    public String imprimeResumos() {
         int quantidade = conta();
         String imprime1 = "- " + quantidade + " resumo(s) cadastrado(s)\n";
         imprime1 += "- ";
 
-        for(int i = 0; i < quantidade; i++){
-            imprime1 += temas[i] + " ";
-            if(i != quantidade - 1){
+        for (int i = 0; i < quantidade; i++) {
+            imprime1 += resumos[i].getTema() + " ";
+            if (i != quantidade - 1) {
                 imprime1 += "| ";
             }
         }
@@ -65,12 +65,12 @@ public class RegistroResumos {
 
     }
 
-    public boolean temResumo(String tema){
+    public boolean temResumo(String tema) {
         boolean tem = false;
 
-        for(int i = 0; i < temas.length; i++){
-            if(temas[i] != null){
-                if(temas[i].equals(tema)){
+        for (int i = 0; i < resumos.length; i++) {
+            if (resumos[i] != null) {
+                if (resumos[i].getTema().equals(tema)) {
                     tem = true;
                     break;
                 }
@@ -80,4 +80,28 @@ public class RegistroResumos {
         return tem;
     }
 
+    public String[] busca(String chaveDeBusca) {
+        String[] buscas = new String[resumos.length];
+        int quantidade = 0;
+        for (int i = 0; i < resumos.length; i++) {
+            boolean tem = false;
+            if (resumos[i] != null) {
+                String[] palavras = resumos[i].getConteudo().split(" ");
+                for (String palavra : palavras) {
+                    if (palavra.equalsIgnoreCase(chaveDeBusca)) {
+                        tem = true;
+                        buscas[quantidade] = resumos[i].getTema() + resumos[i].getConteudo();
+                        quantidade++;
+                    }
+                }
+            }
+        }
+
+        String[] buscasExiste = new String[quantidade];
+
+        for (int i = 0; i < buscasExiste.length; i++)
+            buscasExiste[i] = buscas[i];
+
+        return buscasExiste;
+    }
 }

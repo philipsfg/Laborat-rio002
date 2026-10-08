@@ -26,6 +26,7 @@ public class RegistroTempoOnline {
         return false;
     }
 
+
     @Override
     public String toString(){
         return this.nomeDisciplina + " " + this.tempo + "/" + this.tempoOnlineEsperado;
