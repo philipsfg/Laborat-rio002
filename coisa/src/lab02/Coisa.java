@@ -2,8 +2,15 @@ package lab02;
 
 import java.util.Arrays;
 
+/**
+ * Classe main que tem a função de executar os testes do projeto
+ *
+ * @author Filipe Gabriel de Lima Carneiro
+ */
 public class Coisa {
-    private int[] pesos = {1,2,3,4};
+    /**
+     * Contem os metodos da classe Coisa para a realização dos testes
+     */
     public static void main(String[] args) {
         registrarDescanso();
         System.out.println("-----");
