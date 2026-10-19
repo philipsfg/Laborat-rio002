@@ -5,17 +5,11 @@ public class Filme {
     private String anoFilme;
     private String localFilme;
     private boolean isHot = false;
-    private int posicaoFilme;
 
-    Filme(int posicao, String nome, String ano, String local){
-        this.posicaoFilme = posicao;
+    Filme(String nome, String ano, String local){
         this.nomeFilme = nome;
         this.anoFilme = ano;
         this.localFilme = local;
-    }
-
-    public int getPosicao(){
-        return posicaoFilme;
     }
 
     public String getLocalFilme(){
@@ -35,10 +29,17 @@ public class Filme {
     }
 
     public String detalharFilme(){
+        if (isHot){
+            return "🔥 " + this.nomeFilme + ", " + this.anoFilme + "\n" + this.localFilme;
+        }
         return this.nomeFilme + ", " + this.anoFilme + "\n" + this.localFilme;
     }
 
     public void setIsHot(boolean novoValor){
         this.isHot = novoValor;
+    }
+
+    public boolean getIsHot(){
+        return isHot;
     }
 }
