@@ -1,12 +1,13 @@
-package FilmNow;
+package Film;
 
 public class Filme {
     private String nomeFilme;
     private String anoFilme;
     private String localFilme;
+    private int posicao;
     private boolean isHot = false;
 
-    Filme(String nome, String ano, String local){
+    Filme(int posicao, String nome, String ano, String local){
         this.nomeFilme = nome;
         this.anoFilme = ano;
         this.localFilme = local;
@@ -24,13 +25,17 @@ public class Filme {
         return nomeFilme;
     }
 
+    public int getPosicao(){
+        return posicao;
+    }
+
     public boolean isHot(){
         return isHot;
     }
 
     public String detalharFilme(){
         if (isHot){
-            return "🔥 " + this.nomeFilme + ", " + this.anoFilme + "\n" + this.localFilme;
+            return "🔥" + this.nomeFilme + ", " + this.anoFilme + "\n" + this.localFilme;
         }
         return this.nomeFilme + ", " + this.anoFilme + "\n" + this.localFilme;
     }
@@ -41,5 +46,10 @@ public class Filme {
 
     public boolean getIsHot(){
         return isHot;
+    }
+
+    @Override
+    public String toString() {
+        return getNomeFilme() + ", " + getAnoFilme() + "\n" + getLocalFilme();
     }
 }

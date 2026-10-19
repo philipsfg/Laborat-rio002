@@ -9,31 +9,24 @@ package Film;
 public class FilmNow {
 
     private static final int TAMANHO = 100;
+    private static final int HOTS = 10;
 
-    private String[] filmes; //uma representacao simploria da lista de filmes
-
+    private Filme[] filmes; //uma representacao simploria da lista de filmes
+    private Filme[] hotList;
     /**
      * Cria o FilmNow.
      */
     public FilmNow() {
-        this.filmes = new String[TAMANHO];
+        this.filmes = new Filme[TAMANHO];
+        this.hotList = new Filme[HOTS];
     }
 
     /**
      * Acessa a lista de filmes mantida.
      * @return O array de filmes.
      */
-    public String[] getFilmes() {
+    public Filme[] getFilmes() {
         return this.filmes.clone();
-    }
-
-    /**
-     * Acessa os dados de um filme específico.
-     * @param posicao Posição do filme no sistema.
-     * @return Dados do filme. Null se não há filme na posição.
-     */
-    public String getFilme(int posicao) {
-        return filmes[posicao];
     }
 
     /**
@@ -44,7 +37,60 @@ public class FilmNow {
      * @param local Local onde o filme pode ser assitido.
      */
     public void cadastraFilme(int posicao, String nome, String ano, String local) {
-        this.filmes[posicao] = nome;
+
+        if (posicao >= 1 && posicao <= 100){
+            if(!existeFilme(nome, ano)){
+                if (!local.isEmpty() && !nome.isEmpty()) {
+                    filmes[posicao-1] = new Filme(posicao, nome, ano, local);
+                }
+                else{
+                    System.out.println("\nFILME INVÁLIDO");
+                }
+            }
+            else{
+                System.out.println("\nFILME JA ADICIONADO");
+            }
+        }
+        else{
+            System.out.println("\nPOSIÇÃO INVÁLIDA");
+        }
+    }
+
+    private boolean existeFilme(String nome, String ano){
+        for( Filme filme : filmes){
+            if (filme != null){
+                if (filme.getAnoFilme().equals(ano) && filme.getNomeFilme().equals(nome) ){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Filme[] exibirHotList(){
+        return this.hotList.clone();
+    }
+
+    public void atribuirHotList(int posicaoFilme, int posicaoHotList){
+        if (posicaoHotList >= 1 && posicaoHotList <= 10){
+            hotList[posicaoHotList-1] = new Filme(filmes[posicaoFilme-1].getPosicao(), filmes[posicaoFilme-1].getNomeFilme(), filmes[posicaoFilme-1].getAnoFilme(), filmes[posicaoFilme-1].getLocalFilme());
+            filmes[posicaoFilme-1].setIsHot(true);
+        }
+        else{
+            System.out.println("POSIÇÃO INVÁLIDA");
+        }
+    }
+
+    public void removerHot(int posicao){
+        for (int i = 0; i < filmes.length; i++){
+            if (filmes[i] != null){
+                if (filmes[i].getNomeFilme().equals(hotList[posicao-1].getNomeFilme())){
+                    filmes[i].setIsHot(false);
+                }
+            }
+        }
+        hotList[posicao] = null;
+
     }
 
 }

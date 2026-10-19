@@ -22,7 +22,7 @@ public class MainFilmNow {
              */
             carregaFilmes("filmes_inicial.csv", fn);
         } catch (FileNotFoundException e) {
-            System.err.println("Arquivo não encontrado: " + e.getMessage());
+            System.err.print("Arquivo não encontrado: " + e.getMessage());
         } catch (IOException e) {
             System.err.println("Erro lendo arquivo: " + e.getMessage());
         }
@@ -44,11 +44,14 @@ public class MainFilmNow {
      */
 
     private static String menu(Scanner scanner) {
-        System.out.println(
+        System.out.print(
                 "\n---\nMENU\n" +
                         "(A)Adicionar filme\n" +
                         "(M)Mostrar todos\n" +
                         "(D)Detalhar filme\n" +
+                        "(E)Exibir HotList\n" +
+                        "(H)Atribuir Hot\n" +
+                        "(R)Remover Hot\n" +
                         "(S)Sair\n" +
                         "\n" +
                         "Opção> ");
@@ -76,6 +79,15 @@ public class MainFilmNow {
             case "S":
                 sai();
                 break;
+            case "E":
+                exibirHotList(fn);
+                break;
+            case "H":
+                atribuirHot(fn, scanner);
+                break;
+            case "R":
+                removerHot(fn, scanner);
+                break;
             default:
                 System.out.println("Opção inválida!");
         }
@@ -88,10 +100,10 @@ public class MainFilmNow {
      */
     private static void mostrarFilmes(FilmNow fn) {
 
-        String[] filmes = fn.getFilmes();
+        Filme[] filmes = fn.getFilmes();
         for (int i = 0; i < filmes.length; i++) {
             if (filmes[i] != null) {
-                System.out.println(formataFilme(i, filmes[i]));
+                System.out.println(formataFilme(i + 1, filmes[i].getNomeFilme()));
             }
         }
     }
@@ -105,8 +117,7 @@ public class MainFilmNow {
     private static void detalharFilme(FilmNow fn, Scanner scanner) {
         System.out.print("\nQual filme> ");
         int posicao = scanner.nextInt();
-        String filme = fn.getFilme(posicao);
-        System.out.println("Dados do filme:\n" + filme);
+        System.out.println(fn.getFilmes()[posicao-1].detalharFilme());
     }
 
     /**
@@ -159,4 +170,32 @@ public class MainFilmNow {
         int carregados =  leitor.carregaContatos(arquivoFilmes, fn);
         System.out.println("Carregamos " + carregados + " registros.");
     }
+
+    private static void exibirHotList(FilmNow fn){
+
+        Filme[] filmes = fn.exibirHotList();
+        for (int i = 0; i < filmes.length; i++) {
+            if (filmes[i] != null) {
+                System.out.println(filmes[i].getPosicao() + 1 + " - " + filmes[i].getNomeFilme() + ", " + filmes[i].getAnoFilme());
+            }
+        }
+    }
+
+    private static void atribuirHot(FilmNow fn, Scanner scanner){
+        System.out.print("\nPosição nos filmes> ");
+        int posicaoFilme = scanner.nextInt();
+        System.out.print("\nPosição no hotlist> ");
+        int posicaoHot = scanner.nextInt();
+        fn.atribuirHotList(posicaoFilme, posicaoHot);
+
+    }
+
+
+    private static void removerHot(FilmNow fn, Scanner scanner){
+        System.out.print("\nPosição no hotList> ");
+        int posicao = scanner.nextInt();
+        fn.removerHot(posicao);
+    }
+
+
 }
