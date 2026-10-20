@@ -171,6 +171,10 @@ public class MainFilmNow {
         System.out.println("Carregamos " + carregados + " registros.");
     }
 
+    /**
+     * Exibe os filmes que estão no HotList
+     * @param fn O sistema FilmNow onde o array HotList está
+     */
     private static void exibirHotList(FilmNow fn){
 
         Filme[] filmes = fn.exibirHotList();
@@ -181,6 +185,11 @@ public class MainFilmNow {
         }
     }
 
+    /**
+     * Adiciona um filme já adicionado ao HotList
+     * @param fn O sistema FilmNow onde o array HotList está
+     * @param scanner O scanner para capturar as posições
+     */
     private static void atribuirHot(FilmNow fn, Scanner scanner){
         System.out.print("\nPosição nos filmes> ");
         int posicaoFilme = scanner.nextInt();
@@ -190,7 +199,11 @@ public class MainFilmNow {
 
     }
 
-
+    /**
+     * Remove um filme que está adicionado ao HotList
+     * @param fn O sistema FilmNow onde o array HotList está
+     * @param scanner O scanner para capturar a posição a ser removida
+     */
     private static void removerHot(FilmNow fn, Scanner scanner){
         System.out.print("\nPosição no hotList> ");
         int posicao = scanner.nextInt();

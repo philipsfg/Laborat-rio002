@@ -56,6 +56,12 @@ public class FilmNow {
         }
     }
 
+    /**
+     * Verifica se o filme já existe no array de filmes
+     * @param nome verfica se o nome do filme existe
+     * @param ano verifica se o ano do filme existe
+     * @return true se existir ou false se não existir
+     */
     private boolean existeFilme(String nome, String ano){
         for( Filme filme : filmes){
             if (filme != null){
@@ -67,10 +73,19 @@ public class FilmNow {
         return false;
     }
 
+    /**
+     * Mostra os filmes que estão no HotList
+     * @return o array de HotList
+     */
     public Filme[] exibirHotList(){
         return this.hotList.clone();
     }
 
+    /**
+     * Adiciona um filme já adicionado ao HotList
+     * @param posicaoFilme indica a posição do filme que será colocado no HotList
+     * @param posicaoHotList indica a posição do HotList que o filme será adicionada
+     */
     public void atribuirHotList(int posicaoFilme, int posicaoHotList){
         if (posicaoHotList >= 1 && posicaoHotList <= 10){
             hotList[posicaoHotList-1] = new Filme(filmes[posicaoFilme-1].getPosicao(), filmes[posicaoFilme-1].getNomeFilme(), filmes[posicaoFilme-1].getAnoFilme(), filmes[posicaoFilme-1].getLocalFilme());
@@ -81,6 +96,10 @@ public class FilmNow {
         }
     }
 
+    /**
+     * Remove um filme que está adicionado ao HotList
+     * @param posicao indica a posição que o filme será removido
+     */
     public void removerHot(int posicao){
         for (int i = 0; i < filmes.length; i++){
             if (filmes[i] != null){
